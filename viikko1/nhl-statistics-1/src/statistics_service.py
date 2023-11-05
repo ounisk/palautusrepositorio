@@ -1,4 +1,10 @@
 from player_reader import PlayerReader
+from enum import Enum
+
+class SortBy(Enum):
+    POINTS = 1
+    GOALS = 2
+    ASSISTS = 3
 
 class StatisticsService:
     def __init__(self, playerreader_olio): #
@@ -20,21 +26,79 @@ class StatisticsService:
 
         return list(players_of_team)
 
-    def top(self, how_many):
+    def top(self, how_many, sorting_by=""):
         # metodin käyttämä apufufunktio voidaan määritellä näin
-        def sort_by_points(player):
-            return player.points
+        if sorting_by == SortBy.ASSISTS:
+            def sort_by_assists(player):
+                return player.assists
 
-        sorted_players = sorted(
-            self._players,
-            reverse=True,
-            key=sort_by_points
-        )
+            sorted_players = sorted(
+                self._players,
+                reverse=True,
+                key=sort_by_assists
+            )
 
-        result = []
-        i = 0
-        while i <= how_many:
-            result.append(sorted_players[i])
-            i += 1
+            result = []
+            i = 0
+            while i <= how_many:
+                result.append(sorted_players[i])
+                i += 1
 
-        return result
+            return result
+
+
+        if sorting_by == SortBy.GOALS:
+            def sort_by_goals(player):
+                return player.goals
+
+            sorted_players = sorted(
+                self._players,
+                reverse=True,
+                key=sort_by_goals
+            )
+
+            result = []
+            i = 0
+            while i <= how_many:
+                result.append(sorted_players[i])
+                i += 1
+
+            return result
+        
+
+        if sorting_by==SortBy.POINTS:
+            def sort_by_points(player):
+                return player.points
+
+            sorted_players = sorted(
+                self._players,
+                reverse=True,
+                key=sort_by_points
+            )
+
+            result = []
+            i = 0
+            while i <= how_many:
+                result.append(sorted_players[i])
+                i += 1
+
+            return result
+        
+        else:
+            def sort_by_points(player):
+                return player.points
+
+            sorted_players = sorted(
+                self._players,
+                reverse=True,
+                key=sort_by_points
+            )
+
+            result = []
+            i = 0
+            while i <= how_many:
+                result.append(sorted_players[i])
+                i += 1
+
+            return result
+
