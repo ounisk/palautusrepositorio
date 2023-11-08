@@ -20,15 +20,17 @@ class ProjectReader:
         #print(dependencies_list)
         dev_dependencies_list = []
         for item in (dict_content['tool']['poetry']['group']['dev']['dependencies'].keys()):
-            dev_dependencies_list.append(item)
+            dev_dependencies_list.append(item)   
 
         # deserialisoi TOML-formaatissa oleva merkkijono ja muodosta Project-olio sen tietojen perusteella
         name = dict_content['tool']['poetry']['name']
         description = dict_content['tool']['poetry']['description']
+        license = dict_content['tool']['poetry']['license']
+        authors = dict_content['tool']['poetry']['authors']
         #dependencies = (", ".join(dependencies_list)) # ei tarvitse
         #print(dependencies)
         #dev_dependencies = (", ".join(dev_dependencies_list)) #ei tarvitse
         #print(dev_dependencies)
 
-        return Project(name, description, dependencies_list,dev_dependencies_list)
+        return Project(name, description, license, authors, dependencies_list, dev_dependencies_list)
  
