@@ -14,10 +14,10 @@ def main():
         if player_dict["nationality"] == "FIN":
             player = Player(player_dict)
             players.append(player)
-
-    print("Players from FIN")
-
-    for player in players: #lisää ehto että jos suomalinen niin printtaa - piti hakea suomalisten tiedot...
+    sorted_players = sorted(players, key=lambda x: x.point, reverse = True)
+    print("Players from FIN\n")
+    
+    for player in sorted_players: #lisää ehto että jos suomalinen niin printtaa - piti hakea suomalisten tiedot...
         print(player)
 
 
