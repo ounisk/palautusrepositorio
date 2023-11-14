@@ -35,16 +35,17 @@ Register With Nonmatching Password And Password Confirmation
     Register Should Fail With Message  Password and password confirmation do not match
     
 Login After Successful Registration
-    Set Username  testaaja
-    Set Password  testaaja123
-    Set Password Confirmation  testaaja123
+    Set Username  pelle
+    Set Password  pelle123
+    Set Password Confirmation  pelle123
     Submit Credentials
     Register Should Succeed
-    Close Browser
-    Open And Configure Browser
-    Surf To Login Page
-    Set Username  testaaja
-    Set Password  testaaja123
+    #Close Browser
+    #Open And Configure Browser
+    #Surf To Login Page
+    Surf To Main Page And Logout
+    Set Username  pelle
+    Set Password  pelle123
     Submit Credentials Login
     Login Should Succeed
     
@@ -106,3 +107,7 @@ Surf To Register Page
 Surf To Login Page
     Go To Login Page
     Login Page Should Be Open
+
+Surf To Main Page And Logout
+    Click Link  Continue to main page
+    Click Button  Logout
