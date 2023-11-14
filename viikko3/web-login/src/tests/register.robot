@@ -34,8 +34,40 @@ Register With Nonmatching Password And Password Confirmation
     Submit Credentials
     Register Should Fail With Message  Password and password confirmation do not match
     
+Login After Successful Registration
+    Set Username  testaaja
+    Set Password  testaaja123
+    Set Password Confirmation  testaaja123
+    Submit Credentials
+    Register Should Succeed
+    Close Browser
+    Open And Configure Browser
+    Surf To Login Page
+    Set Username  testaaja
+    Set Password  testaaja123
+    Submit Credentials Login
+    Login Should Succeed
+    
+Login After Failed Registration
+    Set Username  te
+    Set Password  testaaja123
+    Set Password Confirmation  testaaja123
+    Submit Credentials
+    Register Should Fail With Message  Username too short, must be at least 3 letters
+    Close Browser
+    Open And Configure Browser
+    Surf To Login Page
+    Set Username  te
+    Set Password  testaaja123
+    Submit Credentials Login
+    Login Should Fail With Message  Invalid username or password
+        
+
 
 *** Keywords ***
+Login Should Succeed
+    Main Page Should Be Open
+
 Register Should Succeed
     Register Succeeded Page Should Be Open
 
@@ -44,8 +76,16 @@ Register Should Fail With Message
     Register Page Should Be Open
     Page Should Contain  ${message}
 
+Login Should Fail With Message
+    [Arguments]  ${message}
+    Login Page Should Be Open
+    Page Should Contain  ${message}
+
 Submit Credentials
     Click Button  Register
+
+Submit Credentials Login
+    Click Button  Login
 
 Set Username
     [Arguments]  ${username}
@@ -62,3 +102,7 @@ Set Password Confirmation
 Surf To Register Page
     Go To Register Page
     Register Page Should Be Open
+
+Surf To Login Page
+    Go To Login Page
+    Login Page Should Be Open
