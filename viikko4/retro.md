@@ -1,6 +1,6 @@
 # Retrospektiivitekniikat:
 ## Start, Stop, Continue, More of, Less of Wheel
-Retrospektiivitekniikka, jossa tiimi käy esim. sprintin/projektin jälkeen läpi kokemuksia fokusoiden asioihin joita tiimiläisten mielestä heidän pitäisi alkaa tehdä, lopettaa tekeminen, jatkaa tekemistä, tehdä enemmän ja tehdä vähemmän. 
+Rtrospektiivitekniikka, jossa tiimi käy esim. sprintin/projektin jälkeen läpi kokemuksia fokusoiden asioihin joita tiimiläisten mielestä heidän pitäisi alkaa tehdä, lopettaa tekeminen, jatkaa tekemistä, tehdä enemmän ja tehdä vähemmän. 
 
 Keskustelulle ja kommenteille annetaan rauhassa aikaa. Kommentit kirjoitetaan ylös onnenpyörämaisesti 5-osaan jaettuun ympyrään (kullekin start/stop/continue/more of/less of alueelle siis omansa). Retrospektiivin kesto 10min (pieni ryhmä), 25min (suuri ryhmä).
 
