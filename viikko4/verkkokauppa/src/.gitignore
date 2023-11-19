@@ -1,8 +1,0 @@
-.pytest_cache
-__pycache__
-*.tmp
-.coverage
-htmlcov
-log.html
-output.xml
-report.html
