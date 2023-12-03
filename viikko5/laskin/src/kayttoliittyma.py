@@ -16,12 +16,13 @@ class Kayttoliittyma:
     def __init__(self, sovelluslogiikka, root):
         self._sovelluslogiikka = sovelluslogiikka
         self._root = root
+        self._edellinen_komento_olio = ""
 
         self._komennot = {
-            Komento.SUMMA: Summa(sovelluslogiikka, self._lue_syote),
+            Komento.SUMMA: Summa(sovelluslogiikka, self._lue_syote), # , self._lue_vanha_arvo),
             Komento.EROTUS: Erotus(sovelluslogiikka, self._lue_syote),
-            Komento.NOLLAUS: Nollaus(sovelluslogiikka, self._lue_syote)
-            #Komento.KUMOA: Kumoa(sovelluslogiikka, self._lue_syote) # ei ehkä tarvita täällä...
+            Komento.NOLLAUS: Nollaus(sovelluslogiikka, self._lue_syote),
+            #Komento.KUMOA: Summa(sovelluslogiikka, self._lue_syote, self._lue_vanha_arvo) # ei ehkä tarvita täällä...
         }
 
     def kaynnista(self):
@@ -65,31 +66,37 @@ class Kayttoliittyma:
         self._kumoa_painike.grid(row=2, column=3)
 
     def _lue_syote(self):  # tuleeko try except tänne, onko edes tarpeen?
+    
         try:
-            return int(self._syote_kentta.get())   # tämä piti korjata!!!!
+            #vanha_arvo = int(self._arvo_var.get())
+            return int(self._syote_kentta.get()) #, int(self._arvo_var.get())) 
         except ValueError:  
             pass
 
     def _suorita_komento(self, komento):
-        #arvo = 0
-        #try:
-        #    arvo = int(self._syote_kentta.get())
-        #except Exception:
-        #    pass
+       
+        if komento == Komento.KUMOA:   #eli toiminnon kumoamiseen
+            self._edellinen_komento_olio.kumoa()
 
-        komento_olio = self._komennot[komento]
-        #print(komento_olio.arvo)                                      # testi
-        komento_olio.suorita()                                         # tuonne ()lisätty komento
+        else:
+            komento_olio = self._komennot[komento]
+            #komento_olio.suorita()
+            self._edellinen_komento_olio = komento_olio #laittaa muistiin mikä oli suoritettu toiminto
+
+            komento_olio.suorita()    
+
         self._kumoa_painike["state"] = constants.NORMAL
 
-        if self._sovelluslogiikka.arvo() == 0:   # muutettu tulos --> arvo()
+        if self._sovelluslogiikka.arvo() == 0:   
             self._nollaus_painike["state"] = constants.DISABLED
         else:
             self._nollaus_painike["state"] = constants.NORMAL
 
         self._syote_kentta.delete(0, constants.END)
         self._arvo_var.set(self._sovelluslogiikka.arvo())    # muutettu tulos_var.set -> _arvo_var ja sovlog.tulos --> aov.log.arvo()
-
+        #edellinen_komento_olio = self._komennot[komento]    # Eli laittaa muistiin mikä oli suoritettu toiminto
+        #print("vanha_komento")
+        #print(self._edellinen_komento_olio)
 
 
     #def _suorita_komento(self, komento):    # Vanha, joka pitää refaktoroida!
