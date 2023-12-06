@@ -78,9 +78,6 @@ class QueryBuilder:    #tehtävä 4
     def __init__(self, query = All()):   #2.tapaus, jossa playsIn "NYR"
         self.query_object = query
 
-    #def __init__(self, query = And()):   #3 tapaus, jossa ketjutettuja ehtoja / ei tätät
-    #    self.query_object = query
-
     def playsIn(self, team):
         return QueryBuilder(And(self.query_object,PlaysIn(team)))   #kohtaan #3 yhdistetään hakuja.
         #return QueryBuilder(PlaysIn(team))  # kohtaan #2
@@ -92,6 +89,9 @@ class QueryBuilder:    #tehtävä 4
     def hasFewerThan(self, value, attr):
         return QueryBuilder(And(self.query_object, HasFewerThan(value, attr)))
         #return QueryBuilder(HasFewerThan(value,attr))   #draft versio
+
+    def oneOf(self, query1, query2):                  #tehtävään 5                    
+        return QueryBuilder(Or(query1, query2))
 
 
     def build(self):
