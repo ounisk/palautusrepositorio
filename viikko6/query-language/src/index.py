@@ -9,8 +9,8 @@ def main():
 
 #Tehtävä 4:
     query = QueryBuilder()
-    #matcher = query.build()                        #1.tapaus: All, number = 1058
-    #matcher = query.playsIn("NYR").build()          #2. tapaus: plays in "NYR" = 22
+    matcher = query.build()                        #1.tapaus: All, number = 1058
+    matcher = query.playsIn("NYR").build()          #2. tapaus: plays in "NYR" = 22
     matcher = (                                      #3.tapaus  - And mukaan                                 
         query
         .playsIn("NYR")
@@ -22,7 +22,29 @@ def main():
     for player in stats.matches(matcher):
         print(player)
 
-    print("Yllä teht 4 tulostus.")
+    #print("Yllä teht 4 tulostus.")
+
+    #Tehtävä 5: 
+    matcher2 = (
+      query
+        .oneOf(
+        query.playsIn("PHI")
+            .hasAtLeast(10, "assists")
+            .hasFewerThan(5, "goals")
+            .build(),
+        query.playsIn("EDM")
+            .hasAtLeast(50, "points")
+            .build()
+        )
+        .build()
+    )
+
+    #print("Alla teht. 5 tulostus.")   
+    for player in stats.matches(matcher2):
+        print(player)
+
+    
+
 
 # Tehtävä 3:
     #matcher = And(
